@@ -11,7 +11,6 @@ import StorySlide from '../Component/StorySlide';
 function YourStory() {
   const navigate=useNavigate();
   const [selectedStory, setSelectedStory] = useState(null);
-
   const {toggleCreateStoryPopup,isCreateStoryPopupOpen,isModalOpen,setIsModalOpen} = useContext(PopupContext);
   const [showAllStories, setShowAllStories] = useState(false);
     const [userStories, setUserStories] = useState([

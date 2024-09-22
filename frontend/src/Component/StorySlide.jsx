@@ -4,11 +4,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faBookmark, faHeart ,faPaperPlane}  from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import '../Style/StoryCardsStyle.css';
-import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import FoodImage from '../assets/Food.png'
 
-const StorySlide = ({ story, onClose }) => {
+const StorySlide = ({ storyId, slideId, onClose  }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const story =  { id: 1, title: 'Food Story 1', text: 'Delicious food from around the world.', image: FoodImage ,slides: [
+    { id: 1, title: 'Slide 1 Title', text: 'Slide 1 Description', image: FoodImage },
+    { id: 2, title: 'Slide 2 Title', text: 'Slide 2 Description', image: FoodImage },
+    { id: 3, title: 'Slide 1 Title', text: 'Slide 1 Description', image: FoodImage },
+    { id: 4, title: 'Slide 2 Title', text: 'Slide 2 Description', image: FoodImage },
+    { id: 5, title: 'Slide 1 Title', text: 'Slide 1 Description', image: FoodImage },
+    { id: 6, title: 'Slide 2 Title', text: 'Slide 2 Description', image: FoodImage },  
+   
+  ],};
+  
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlideIndex((prevIndex) => 
@@ -21,16 +32,24 @@ const StorySlide = ({ story, onClose }) => {
   const handleClose = () => {
     onClose();
   };
-
+  useEffect(() => {
+    const slideFromParams = parseInt(searchParams.get('slide'), 10);
+    if (!isNaN(slideFromParams) && slideFromParams >= 0 && slideFromParams < story.slides.length) {
+      setCurrentSlideIndex(slideFromParams);
+    }
+  }, [searchParams, story.slides.length]);
   const handleNext = () => {
     if (currentSlideIndex < story.slides.length - 1) {
       setCurrentSlideIndex(currentSlideIndex + 1);
+      setSearchParams({ story: storyId, slide: currentSlideIndex + 1 });
     }
   };
 
   const handlePrevious = () => {
     if (currentSlideIndex > 0) {
       setCurrentSlideIndex(currentSlideIndex - 1);
+      setSearchParams({ story: storyId, slide: currentSlideIndex - 1 });
+
     }
   };
 

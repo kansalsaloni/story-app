@@ -4,10 +4,12 @@ import FoodImage from '../assets/Food.png'
 import '../Style/StoryCardsStyle.css';
 import { PopupContext } from '../util/PopupContext';
 import StorySlide from '../Component/StorySlide';
+import { useSearchParams } from 'react-router-dom';
 
 function Bookmarks() {
   const {isModalOpen,setIsModalOpen} = useContext(PopupContext);
   const [selectedStory, setSelectedStory] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
     const [bookmarkedStories, setBookmarkedStories] = useState([
         {
@@ -76,8 +78,15 @@ function Bookmarks() {
       ]);
       const handleCardClick = (story) => {
         setSelectedStory(story);
-        setIsModalOpen(true);
-        
+        setIsModalOpen(true);   
+        setSearchParams({ story: story.id, slide: 0 });   
+      };
+      const storyId = searchParams.get('story');
+      const slideId = searchParams.get('slide');
+      const closePopup = () => {
+        searchParams.delete('story');
+        searchParams.delete('slide');
+        setSearchParams(searchParams);
       };
   return (
     <>
@@ -96,9 +105,16 @@ function Bookmarks() {
       </div>
       </div>
     </div>
-    {isModalOpen && (
-        <StorySlide story={selectedStory} onClose={ ()=>setIsModalOpen(false)} />
+    {storyId && (
+        <StorySlide 
+          storyId={storyId} 
+          slideId={slideId} 
+          onClose={closePopup} 
+        />
       )}
+    {/* {isModalOpen && (
+        <StorySlide story={selectedStory} onClose={ ()=>setIsModalOpen(false)} />
+      )} */}
     </>
   )
 }
