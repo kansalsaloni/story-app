@@ -4,12 +4,13 @@ import FoodImage from '../assets/Food.png'
 import '../Style/StoryCardsStyle.css';
 import { PopupContext } from '../util/PopupContext';
 import StorySlide from '../Component/StorySlide';
-import { useSearchParams } from 'react-router-dom';
+import {  useNavigate, useSearchParams } from "react-router-dom";
 
 function Bookmarks() {
-  const {isModalOpen,setIsModalOpen} = useContext(PopupContext);
+  const {isModalOpen,setIsModalOpen,isCreateStoryPopupOpen} = useContext(PopupContext);
   const [selectedStory, setSelectedStory] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate=useNavigate();
 
     const [bookmarkedStories, setBookmarkedStories] = useState([
         {
@@ -112,9 +113,9 @@ function Bookmarks() {
           onClose={closePopup} 
         />
       )}
-    {/* {isModalOpen && (
-        <StorySlide story={selectedStory} onClose={ ()=>setIsModalOpen(false)} />
-      )} */}
+  {isCreateStoryPopupOpen&&(
+      navigate('/create-story')
+  )}
     </>
   )
 }
