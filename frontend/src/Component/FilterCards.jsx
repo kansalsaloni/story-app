@@ -15,7 +15,7 @@ function FilterCards() {
         { id: 4, label: 'World', imageUrl: WorldImage },
         { id: 5, label: 'India', imageUrl: IndiaImage }
       ];
-      const [activeCategory, setActiveCategory] = useState(null);
+      const [activeCategory, setActiveCategory] = useState(1);
 
       const handleCardClick = (categoryId) => {
         setActiveCategory(categoryId);
