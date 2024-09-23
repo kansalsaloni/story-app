@@ -33,7 +33,10 @@ function Header({ isAuthenticated, userName, avatarUrl }) {
       navigate('/your-story');
     }
   return (  
-    <header className="header">     
+    <header className="header">    
+      <div className="heading">
+        SwipeTory
+      </div> 
       <div className="header-right">
         {!isAuthenticated ? (
           <>

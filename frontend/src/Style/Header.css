@@ -4,13 +4,15 @@
     height: 73px;
     background-color: #ffffff;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     position: relative;
   }
-  
+  .header .heading{
+    margin-left: 50px;
+  }
   .header-right {
     display: flex;
     align-items: center;
