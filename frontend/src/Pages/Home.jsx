@@ -1,10 +1,12 @@
-import React, { useState,useContext } from 'react';
+import React, { useState,useContext, useEffect } from 'react';
 import FoodImage from '../assets/Food.png'
 import {  useNavigate, useSearchParams } from "react-router-dom";
 import { PopupContext } from '../util/PopupContext';
 import FilterCards from "../Component/FilterCards";
 import StoryCards from "../Component/StoryCards";
 import StorySlide from "../Component/StorySlide";
+import LoginRegisterForm from '../Component/LoginRegisterForm';
+import CreateStoryPopUp from '../Component/CreateStoryPopUp';
 
 function Home() {
 
@@ -74,12 +76,32 @@ function Home() {
     setSearchParams(searchParams);
   };
 
+  useEffect(() => {
+    const hasPopupOpen = storyId || isRegisterPopupOpen || isLoginPopupOpen || isCreateStoryPopupOpen;
+    
+    if (hasPopupOpen) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+
+    return () => {
+      document.body.classList.remove('no-scroll'); // Clean up on component unmount
+    };
+  }, [storyId, isRegisterPopupOpen, isLoginPopupOpen, isCreateStoryPopupOpen]);
+
+
+
+
+
   return (
     <>
-    <FilterCards />
-    
-    <StoryCards isAuthenticate={true} setSearchParams={setSearchParams} categories={categories} setCategories={setCategories}  setSelectedStory={setSelectedStory}/>
-      
+    <div className={`home-content ${storyId || isRegisterPopupOpen || isLoginPopupOpen || isCreateStoryPopupOpen ? 'background-blurred' : ''}`}>
+
+        <FilterCards />  
+        <StoryCards isAuthenticate={true} setSearchParams={setSearchParams} categories={categories} setCategories={setCategories}  setSelectedStory={setSelectedStory}/>
+    </div>
+
     {storyId && (
         <StorySlide 
           storyId={storyId} 
@@ -91,13 +113,14 @@ function Home() {
     {/* Show popup  */}
     
   {isRegisterPopupOpen&&(
-      navigate('/register')
-  )}
+  <LoginRegisterForm popupHeading="Register"/>
+    )}
   {isLoginPopupOpen&&(
-      navigate('/login')
+     <LoginRegisterForm popupHeading="Login"/>
   )}
   {isCreateStoryPopupOpen&&(
-      navigate('/create-story')
+<CreateStoryPopUp />
+
   )}
     </>
 

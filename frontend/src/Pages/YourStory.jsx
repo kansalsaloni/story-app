@@ -7,6 +7,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { PopupContext } from '../util/PopupContext';
 import { useNavigate } from 'react-router-dom';
 import StorySlide from '../Component/StorySlide';
+import CreateStoryPopUp from '../Component/CreateStoryPopUp';
 
 function YourStory() {
   const navigate=useNavigate();
@@ -116,7 +117,7 @@ function YourStory() {
       </button>
     </div>
     {isCreateStoryPopupOpen&&(
-      navigate('/edit-story')
+    <CreateStoryPopUp />
   )}
     {isModalOpen && (
         <StorySlide story={selectedStory} onClose={ ()=>setIsModalOpen(false)} />

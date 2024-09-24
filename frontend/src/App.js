@@ -21,12 +21,8 @@ function App() {
 
     <Routes>
       <Route path="/" exact element={<Home />}/>
-      <Route path="/login"  element={<LoginRegisterForm popupHeading="Login"/>}/>
-      <Route path="/register"  element={<LoginRegisterForm popupHeading="Register"/>}/>
-      <Route path="/create-story"  element={<CreateStoryPopUp />}/>
       <Route path="/bookmarks"  element={<Bookmarks />}/>
       <Route path="/your-story"  element={<YourStory isAuthenticate={true}/>}/>
-      <Route path="/edit-story"   element={<CreateStoryPopUp />}/>
       <Route path="/story/:storyid/slide/:slideid" element={<StorySlide />} />
     </Routes>
     </PopupProvider >

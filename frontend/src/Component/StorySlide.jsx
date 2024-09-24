@@ -22,12 +22,18 @@ const StorySlide = ({ storyId, slideId, onClose  }) => {
   
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlideIndex((prevIndex) => 
-        prevIndex < story.slides.length - 1 ? prevIndex + 1 : 0
-      );
+      setCurrentSlideIndex((prevIndex) => {
+        if (prevIndex < story.slides.length - 1) {
+          return prevIndex + 1;
+        } else {
+          // Close after last slide instead of restarting
+          onClose();
+          return prevIndex;  // Stop the slide progression
+        }
+      });
     }, 15000); 
     return () => clearInterval(timer);
-  }, [story.slides.length]);
+  }, [story.slides.length]);  
 
   const handleClose = () => {
     onClose();
