@@ -14,12 +14,11 @@ function Home() {
   const navigate=useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedStory, setSelectedStory] = useState(null);
-
+const isShimmerLoading=true;
 
   const [categories, setCategories] = useState([
     {
       category: 'Food',
-      heading: 'Top Stories for Food',
       showAll: false,
       cards: [
         { id: 1, title: 'Food Story 1', text: 'Delicious food from around the world.', image: FoodImage ,slides: [
@@ -44,7 +43,6 @@ function Home() {
     },
     {
       category: 'Medical',
-      heading: 'Top Stories for Medical',
       showAll: false,
       cards: [
         { id: 1, title: 'Medical Story 1', text: 'Latest medical breakthroughs.', image: FoodImage,
@@ -90,7 +88,7 @@ function Home() {
     };
   }, [storyId, isRegisterPopupOpen, isLoginPopupOpen, isCreateStoryPopupOpen]);
 
-
+const category=['Food','Medical'];
 
 
 
@@ -99,7 +97,7 @@ function Home() {
     <div className={`home-content ${storyId || isRegisterPopupOpen || isLoginPopupOpen || isCreateStoryPopupOpen ? 'background-blurred' : ''}`}>
 
         <FilterCards />  
-        <StoryCards isAuthenticate={true} setSearchParams={setSearchParams} categories={categories} setCategories={setCategories}  setSelectedStory={setSelectedStory}/>
+        <StoryCards isAuthenticate={true} setSearchParams={setSearchParams} categoryArray={category} categories={categories} setCategories={setCategories}  setSelectedStory={setSelectedStory} isShimmerLoading={isShimmerLoading}/>
     </div>
 
     {storyId && (
