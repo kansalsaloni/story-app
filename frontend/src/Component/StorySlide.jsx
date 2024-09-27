@@ -58,7 +58,15 @@ const StorySlide = ({ storyId, slideId, onClose  }) => {
 
     }
   };
-
+  const handleSlideClick = (e) => {
+    const slideWidth = e.currentTarget.clientWidth;
+    const clickPosition = e.clientX;
+    if (clickPosition < slideWidth / 2) {
+      handlePrevious();
+    } else {
+      handleNext();
+    }
+  };
   return (
     <div className="story-modal">
       <div className="modal-background"></div>
@@ -73,7 +81,7 @@ const StorySlide = ({ storyId, slideId, onClose  }) => {
             </button>
           <div className="slide-container">
             
-            <div className='slide' style={{ backgroundImage: `url(${story.slides[currentSlideIndex].image})` }}>
+            <div className='slide'    onClick={handleSlideClick} style={{ backgroundImage: `url(${story.slides[currentSlideIndex].image})` }}>
                <div className='slides-container'>
                     <div className='slides-line-container'>
                         {story.slides.map((slide, index) => (
