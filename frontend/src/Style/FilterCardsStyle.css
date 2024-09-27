@@ -4,10 +4,23 @@
     justify-content: flex-start;
     padding: 40px 40px 0px 40px;
     overflow-x: auto;
-    scrollbar-width: none; 
-    -ms-overflow-style: none;
-    
+padding-bottom: 10px;
 }
+
+.filter-cards-container::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.filter-cards-container::-webkit-scrollbar-thumb {
+  background: rgb(224, 223, 223); 
+  border-radius: 10px;
+}
+
+.filter-cards-container::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
 .filter-card {
       flex: 0 0 auto;
     width:250px;
