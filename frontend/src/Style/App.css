@@ -23,6 +23,9 @@
   .btn:hover{
     border: 3px solid #00ACD2;
   }
+  .btn-active{
+    border: 3px solid #00ACD2;
+  }
   .popup-close-icon{
     position: absolute;
     top:20px;
